@@ -1,0 +1,9 @@
+rootProject.name = 'version-mgr'
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files("./libs.versions.toml"))
+        }
+    }
+}

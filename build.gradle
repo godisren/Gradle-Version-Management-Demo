@@ -1,0 +1,35 @@
+plugins {
+	id 'java'
+
+	alias(libs.plugins.springboot)	// id 'org.springframework.boot' version '3.0.5'
+	alias(libs.plugins.springboot.dependency.management)	//	id 'io.spring.dependency-management' version '1.1.0'
+
+}
+
+group = 'me.stone'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// implementation 'org.apache.commons:commons-lang3:3.9'
+	implementation(libs.commons.lang3)
+
+	// below equals to :
+	// implementation org.codehaus.groovy:groovy:3.0.5
+	// implementation org.codehaus.groovy:groovy-json:3.0.5
+	// implementation org.codehaus.groovy:groovy-nio:3.0.5
+	implementation(libs.bundles.groovy)
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
