@@ -4,12 +4,35 @@ This repo shows how to manage central dependencies with specific version via Gra
 and share with other Gradle projects.
 
 # How to use it
-The file `libs.versions.toml` defines all dependency versions.
-We can set the file path in `settings.gralde`. In addition, the file `toml` could be published to maven repository.
-The other projects can refer to it from that remote repository. By this way, 
-we can have a central place to manage the library dependency.
-more detail refers to [here](https://docs.gradle.org/current/userguide/platforms.html#sec:version-catalog-plugin).
+The file `libs.versions.toml` defines all dependency versions such as plugin and libraries.
+```properties
+# libs.versions.toml
+
+[versions]
+groovy = "3.0.5"
+
+[libraries]
+commons-lang3 = { group = "org.apache.commons", name = "commons-lang3", version = "3.9" }
+groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
+groovy-json = { module = "org.codehaus.groovy:groovy-json", version.ref = "groovy" }
+groovy-nio = { module = "org.codehaus.groovy:groovy-nio", version.ref = "groovy" }
+
+[bundles]
+groovy = ["groovy-core", "groovy-json", "groovy-nio"]
+
+[plugins]
+springboot = { id = "org.springframework.boot", version = "3.0.5" }
+springboot-dependency-management = { id = "io.spring.dependency-management", version = "1.0.15.RELEASE" }
+```
+
+
+We can set its file path in `settings.gradle` under other projects. In addition, the file `toml` could be published to maven repository.
+The other projects can refer to it from remote repository. By this way, 
+we have a central place to manage the library dependencies.
+More detail refers to [here](https://docs.gradle.org/current/userguide/platforms.html#sec:version-catalog-plugin).
 ```groovy
+# settings.gradle
+
 dependencyResolutionManagement {
     versionCatalogs {
         libs {
@@ -22,6 +45,8 @@ Then, declare the libs we'd like to used from `libs.versions.toml` in our projec
 It supports plugins and dependencies.
 
 ```groovy
+# build.gradle
+
 plugins {
     alias(libs.plugins.springboot)
     alias(libs.plugins.springboot.dependency.management)
