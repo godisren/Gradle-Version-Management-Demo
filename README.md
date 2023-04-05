@@ -1,6 +1,6 @@
 # Introduction
 
-This repo shows how to manage central dependencies with specific version via Gradle [version catalog](#https://docs.gradle.org/current/userguide/platforms.html#sub:central-declaration-of-dependencies),
+This repo shows how to manage central dependencies with specific version via Gradle [version catalog](https://docs.gradle.org/current/userguide/platforms.html#sub:central-declaration-of-dependencies),
 and share with other Gradle projects.
 
 # How to use it
@@ -8,7 +8,7 @@ The file `libs.versions.toml` defines all dependency versions.
 We can set the file path in `settings.gralde`. In addition, the file `toml` could be published to maven repository.
 The other projects can refer to it from that remote repository. By this way, 
 we can have a central place to manage the library dependency.
-more detail refers to [here](#https://docs.gradle.org/current/userguide/platforms.html#sec:version-catalog-plugin).
+more detail refers to [here](https://docs.gradle.org/current/userguide/platforms.html#sec:version-catalog-plugin).
 ```groovy
 dependencyResolutionManagement {
     versionCatalogs {
